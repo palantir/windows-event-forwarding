@@ -1,0 +1,37 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Applocker</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>AppLocker blocks, AppLocker permitted scripts, software restriction policy blocks</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>1</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" Path="Microsoft-Windows-AppLocker/EXE and DLL">
+        <!-- This rule looks for Applocker EXE or Script events -->
+        <Select Path="Microsoft-Windows-AppLocker/EXE and DLL">*[UserData[RuleAndFileData[PolicyName="EXE"]]]</Select>
+        <Select Path="Microsoft-Windows-AppLocker/MSI and Script">*</Select>
+        <!-- AppLocker packaged (Modern UI) app execution -->
+        <Select Path="Microsoft-Windows-AppLocker/Packaged app-Execution">*</Select>
+        <!-- AppLocker packaged (Modern UI) app installation -->
+        <Select Path="Microsoft-Windows-AppLocker/Packaged app-Deployment">*</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC2-Applocker</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

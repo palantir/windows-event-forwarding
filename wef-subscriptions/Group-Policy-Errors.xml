@@ -1,0 +1,36 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Group-Policy-Errors</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Group Policy errors. </Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>5</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" Path="System">
+        <!-- Group Policy Service Errors -->
+        <!-- 1085: Application of Group Policy failures -->
+        <!-- 1125: Group Policy Service -->
+        <!-- 1127: Group Policy Service-->
+        <!-- 1129: Group Policy Preprocessing Networking -->
+        <Select Path="System">*[System[Provider[@Name='Microsoft-Windows-GroupPolicy'] and Level=2 and (EventID=1085 or EventID=1125 or EventID=1127 or EventID=1129)]]</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC2-Group-Policy-Errors</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

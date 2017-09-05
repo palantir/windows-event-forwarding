@@ -1,0 +1,37 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Powershell</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Events from Microsoft\PowerShell\Operational</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>5</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0">
+        <!-- This rule looks for powershell logs in the Windows EVTX files. -->
+        <!-- Powershell Operational Logs (e.g. Start, Stop, Blocked) -->
+        <Select Path="Microsoft-Windows-PowerShell/Operational">*</Select>
+        <!-- Powershell DesiredStateConfiguration Logs -->
+        <Select Path="Microsoft-Windows-PowerShell-DesiredStateConfiguration-FileDownloadManager/Operational">*</Select>
+        <!-- Catch-all for legacy powershell logs -->
+        <Select Path="Windows PowerShell">*</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC-Powershell</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

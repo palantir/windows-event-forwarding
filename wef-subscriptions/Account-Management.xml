@@ -1,0 +1,66 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Account-Management</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Events pertaining to account changes. Passwords, groups, status, etc.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>1</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" Path="Security">
+        <!-- 4627: Group Membership Information -->
+        <Select Path="Security">*[System[(EventID=4627)]]</Select>
+        <!-- 4720: A user account was created. -->
+        <Select Path="Security">*[System[(EventID=4720)]]</Select>
+        <!-- 4722: A user account was enabled. -->
+        <!-- 4723: Attempt was made to change account's password. -->
+        <!-- 4724: An attempt was made to reset an account's password. -->
+        <!-- 4725: A user account was disabled. -->
+        <!-- 4726: A user account was deleted. -->
+        <!-- 4727: A security-enabled global group was created. -->
+        <!-- 4728: A member was added to a security-enabled global group. -->
+        <!-- 4729: A member was removed to a security-enabled global group. -->
+        <!-- 4730: A security-enabled global group was deleted. -->
+        <!-- 4731: A security-enabled local group was created. -->
+        <!-- 4732: A member was added to a security-enabled local group. -->
+        <!-- 4733: A member was removed from a security-enabled local group. -->
+        <!-- 4734: A security-enabled local group was deleted. -->
+        <!-- 4737: A security-enabled global group was changed. -->
+        <!-- 4738: A user account was changed. -->
+        <!-- 4739: Domain Policy was changed. -->
+        <!-- 4755: A security-enabled universal group was changed. -->
+        <!-- 4756: A security-enabled universal group was changed. -->
+        <!-- 4757: A security-enabled universal group was changed. -->
+        <!-- 4764: A group's type was changed. -->
+        <!-- 4765: SID History was added to an account. -->
+        <!-- 4766: An attempt to add SID History to an account failed. -->
+        <!-- 4767: A user account was unlocked. -->
+        <Select Path="Security">*[System[(EventID &gt;=4722 and EventID &lt;=4734)]]</Select>
+        <Select Path="Security">*[System[(EventID &gt;=4737 and EventID &lt;=4739)]]</Select>
+        <Select Path="Security">*[System[(EventID &gt;=4755 and EventID &lt;=4757)]]</Select>
+        <Select Path="Security">*[System[(EventID &gt;=4764 and EventID &lt;=4767)]]</Select>
+        <!-- 4704: A user right (privilege) was assigned. -->
+        <!-- 4780: The ACL was set on accounts which are members of administrators group. -->
+        <Select Path="Security">*[System[(EventID=4704 or EventID=4782)]]</Select>
+        <!-- 4735: Modification of Security-enabled groups -->
+        <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and EventID=4735]]</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC3-Account-Management</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

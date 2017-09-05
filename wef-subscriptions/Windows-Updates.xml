@@ -1,0 +1,34 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Windows-Updates</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Windows Update Installation Events, New System Filter Drivers, and Service Errors.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>5</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" >
+        <!-- Windows Update Service Errors -->
+        <Select Path="Microsoft-Windows-WindowsUpdateClient/Operational">*[System[Provider[@Name='Microsoft-Windows-WindowsUpdateClient'] and Level=2 and (EventID=20 or EventID=24 or EventID=25 or EventID=31 or EventID=34 or EventID=35)]]</Select>
+        <!-- Hotpatching Errors -->
+        <Select Path="Setup">*[System[Provider[@Name='Microsoft-Windows-Servicing'] and Level=0 and EventID=1009]]</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC4-Windows-Updates</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

@@ -1,0 +1,62 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Operating-System</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>OS startup and shutdown, RPC violations, SMBv1 auditing, Remote SAM access, OS crashes.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>5</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" Path="System">
+        <!-- System startup (12 - includes OS/SP/Version) and shutdown -->
+        <Select Path="System">*[System[Provider[@Name='Microsoft-Windows-Kernel-General'] and (EventID=12 or EventID=13)]]</Select>
+      </Query>
+      <Query Id="1" Path="System">
+        <!-- Shutdown initiate requests, with user, process and reason (if supplied) -->
+        <Select Path="System">*[System[Provider[@Name='USER32'] and (EventID=1074)]]</Select>
+      </Query>
+      <Query Id="2" Path="Security">
+        <!-- 4816: RPC detected an integrity violation while decrypting an incoming message. -->
+        <!-- 4817: Auditing settings on object were changed. -->
+        <!-- 4826 Boot Configuration Data loaded. -->
+        <Select Path="Security">*[System[(EventID=4816 or EventID=4817 or EventID=4826)]]</Select>
+      </Query>
+      <Query Id="3" Path="System">
+        <!-- 16962: A remote call to the SAM database has been denied -->
+        <!-- 16965: Remote calls to the SAM database have been denied in the past 900 seconds throttling window -->
+        <!-- 16968: The following client would have been normally been denied access to the SAM database -->
+        <!-- 16969: Remote calls to the SAM database are being restricted using the default security descriptor -->
+        <!-- EventID 16965 is enabled via a registry key: https://goo.gl/1qXKZL -->
+        <Select Path="System">*[System[(EventID=16962 or EventID=16965 or EventID=16968 or EventID=16969)]]</Select>
+      </Query>
+      <Query Id="4" Path="Microsoft-Windows-SMBServer/Audit">
+        <!-- NOTE: The ACL for Microsoft-Windows-SMBServer/Audit may need to be updated to allow read access by Event Log Readers -->
+        <!-- This EventID only exists in WinServer2016 and Win10 -->
+        <!-- 3000: Client attempted to use SMBv1  -->
+        <Select Path="Microsoft-Windows-SMBServer/Audit">*[System[Provider[@Name='Microsoft-Windows-SMBServer'] and (EventID=3000)]]</Select>
+      </Query>
+      <Query Id="5" Path="System">
+        <!-- 41: The system has rebooted without cleanly shutting down first -->
+        <!-- 1001: Application crashes, hangs, and generic reports  -->
+        <!-- 6008: The previous system shutdown was unexpected. -->
+        <Select Path="System">*[System[(EventID=41 or EventID=1001 or EventID=6008)]]</Select>
+      </Query>
+    </QueryList>]]></Query>
+    <ReadExistingEvents>true</ReadExistingEvents>
+    <TransportName>http</TransportName>
+    <ContentFormat>RenderedText</ContentFormat>
+    <Locale Language="en-US"/>
+    <LogFile>WEC5-Operating-System</LogFile>
+    <AllowedSourceNonDomainComputers/>
+    <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+  </Subscription>

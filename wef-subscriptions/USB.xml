@@ -1,0 +1,34 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>USB</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Detection of insertion and removal of USB Mass Storage devices.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>1</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0">
+        <!-- 43: New USB Device Information -->
+        <!-- <Select Path="Microsoft-Windows-USB-USBHUB3-Analytic">*[System[Provider[@Name='Microsoft-Windows-USB-USBHUB3'] and Level=4 and EventID=43]] and *[EventData[Data[@Name='fid_DeviceDescription']="USB Mass Storage Device"]] </Select>-->
+        <!-- 400, 410: New Mass Storage Device Installation -->
+        <Select Path="Microsoft-Windows-Kernel-PnP/Configuration">*[System[Provider[@Name='Microsoft-Windows-Kernel-PnP'] and Level=4 and (EventID=400 or EventID=410)]] and *[EventData[Data[@Name='DriverName']=&quot;usbstor.inf&quot;]] </Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC3-USB</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

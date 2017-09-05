@@ -1,0 +1,39 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Authentication</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Authentication events during logon and logoff.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>5</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" Path="Security">
+        <!-- 4624: An account was successfully logged on. -->
+        <!-- 4625: An account failed to log on. -->
+        <!-- 4634: An account was successfully logged off. -->
+        <!-- 4672: Special privileges assigned to a new logon, administrative logins -sa, -ada, etc. -->
+        <!-- 4775: An account could not be mapped for logon. -->
+        <!-- 4777: The domain controller failed to validate the credentials for an account. -->
+        <!-- Suppress SECURITY_LOCAL_SYSTEM_RID A special account used by the OS, noisy -->
+        <Select Path="Security">*[System[(EventID=4624 or EventID=4625 or EventID=4634 or EventID=4672 or EventID=4775 or EventID=4777)]]</Select>
+        <Suppress Path="Security">*[EventData[Data[1]="S-1-5-18"]]</Suppress>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC-Authentication</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

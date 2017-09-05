@@ -1,0 +1,42 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Shares</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Share access, C$ share or file share access, share creation or deletetion, UNC drive mapping.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>5</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" Path="Security">
+        <!-- 5140: Network share object access -->
+        <!-- 5145: A network share object was checked to see whether client can be granted desired access -->
+        <Select Path="Security">*[System[(EventID=5140 or EventID=5145)]]</Select>
+      </Query>
+      <Query Id="1" Path="Security">
+        <!-- 5142: Network Share create -->
+        <!-- 5144: Network Share Delete -->
+        <Select Path="Security">*[System[(EventID=5142 or EventID=5144)]]</Select>
+      </Query>
+      <Query Id="2" Path="Microsoft-Windows-SMBClient/Operational">
+        <!-- All UNC/mapped drive successful connection -->
+        <Select Path="Microsoft-Windows-SMBClient/Operational">*[System[(EventID=30622 or EventID=30624)]]</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC4-Shares</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>
