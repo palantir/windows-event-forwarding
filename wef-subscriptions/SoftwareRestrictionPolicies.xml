@@ -1,5 +1,5 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
-  <SubscriptionId>SoftwareRestrictionPolicies</SubscriptionId>
+  <SubscriptionId>Software-Restriction-Policies</SubscriptionId>
   <SubscriptionType>SourceInitiated</SubscriptionType>
   <Description>SRP Logs from within the System log</Description>
   <Enabled>true</Enabled>
