@@ -1,4 +1,4 @@
-?<?xml version="1.0" encoding="UTF-16"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <instrumentationManifest xsi:schemaLocation="http://schemas.microsoft.com/win/2004/08/events eventman.xsd" xmlns="http://schemas.microsoft.com/win/2004/08/events" xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:trace="http://schemas.microsoft.com/win/2004/08/events/trace">
 	<instrumentation>
 		<events>
@@ -170,9 +170,9 @@
 				<channels>
 					<importChannel name="System" chid="C6">
 					</importChannel>
-					<channel name="WEC6-Sysmon-Operational" chid="WEC6-Sysmon-Operational" symbol="WEC6-Sysmon-Operational" type="Operational" enabled="true">
+					<channel name="WEC6-Sysmon-Operational" chid="WEC6-Sysmon-Operational" symbol="WEC6_Sysmon_Operational" type="Operational" enabled="true">
 					</channel>
-					<channel name="WEC6-Software-Restriction-Policies" chid="WEC6-Software-Restriction-Policies" symbol="WEC6-Software-Restriction-Policies" type="Operational" enabled="true">
+					<channel name="WEC6-Software-Restriction-Policies" chid="WEC6-Software-Restriction-Policies" symbol="WEC6_Software_Restriction_Policies" type="Operational" enabled="true">
 					</channel>
 				</channels>
 				<templates>
