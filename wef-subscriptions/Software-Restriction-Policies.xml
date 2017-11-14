@@ -17,6 +17,13 @@
   <Query><![CDATA[
     <QueryList>
       <Query Id="0" Path="System">
+        <!-- 865: SRP - Blocked by default disallow rule -->
+        <!-- 866: SRP - Blocked by path rule -->
+        <!-- 867: SRP - Blocked by publisher rule -->
+        <!-- 868: SRP - Blocked by hash or zone rule -->
+        <!-- 882: SRP - Blocked, but no UI acknowledgement shown -->
+        <!-- Event ID descriptions thanks to Application Whitelisting using Software Restriction Policies by IAD 
+             http://www.isssource.com/wp-content/uploads/2012/02/ISSSource-Application_Whitelisting_Using_SRP.pdf -->
         <Select Path="System">*[System[Provider[@Name='Microsoft-Windows-SoftwareRestrictionPolicies'] and (EventID=865 or EventID=866 or EventID=867 or EventID=868 or EventID=882)]]</Select>
       </Query>
     </QueryList>]]></Query>
