@@ -47,16 +47,20 @@ If you're like us and don't trust random DLLs, feel free to use our manifest fil
 * **WEC5-Log-Deletion-Security**: Event channel for collecting log deletion events.
 * **WEC5-Log-Deletion-System**: Event channel for collecting log deletion events.
 * **WEC5-Autoruns**: Event channel for collecting Autoruns-To-Wineventlog events.
+* **WEC6-Sysmon-Operational**: Event channel for collecting Sysinternals Sysmon events.
+* **WEC6-Software-Restriction-Policies**: Event channel for collecting Software Restriction Policy events.
 
 ## Pre-Requisites:
 You will need the following software to build the DLL:
-- Windows 10 SDK
+- Windows 10 SDK (Note that ecmangen.exe has been removed from the SDK as at version 10.0.16299.15)
+
+>From [Microsoft](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk): "Developers who rely on ecmangen for event manifest creation are advised to install the [Windows Creators Edition of the SDK](https://developer.microsoft.com/en-us/windows/downloads/sdk-archive) to obtain the file"
 - Windows Workstation
 
 ## Editing:
 Launch the Manifest Generator
 ```
-ìC:\Program Files (x86)\Windows Kits\10\bin\x64\ecmangen.exeî
+‚ÄúC:\Program Files (x86)\Windows Kits\10\bin\x64\ecmangen.exe‚Äù
 ```
 Load the CustomEventChannels.man file from this repo.
 
