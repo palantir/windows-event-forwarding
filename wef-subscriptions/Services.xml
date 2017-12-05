@@ -16,9 +16,15 @@
   </Delivery>
   <Query><![CDATA[
     <QueryList>
-      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
       <Query Id="0" Path="System">
+        <!-- Inspired by Microsoft Documentation and/or IADGOV -->
         <!-- Service Control Manager Failures and Crashes -->
+        <!-- 7022: The service hung on starting -->
+        <!-- 7023: The service terminated with the following error -->
+        <!-- 7023: The service terminated with the following error -->
+        <!-- 7024: The service terminated with service-specific error -->
+        <!-- 7026: The following boot-start or system-start driver(s) failed to load -->
+        <!-- 7031: The service terminated unexpectedly. It has done this x time(s). The following corrective action will be taken in y milliseconds -->
         <Select Path="System">*[System[Provider[@Name='Service Control Manager'] and (Level=1 or Level=2 or Level=3 or Level=4 or Level=0) and (EventID=7022 or EventID=7023 or EventID=7024 or EventID=7026 or EventID=7031 or EventID=7032 or EventID=7034)]]</Select>
         <!-- 7040: Service Start Type Changed -->
         <!-- 7045: Service Installed -->

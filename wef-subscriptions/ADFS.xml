@@ -1,14 +1,14 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
-  <SubscriptionId>WMI</SubscriptionId>
+  <SubscriptionId>ADFS</SubscriptionId>
   <SubscriptionType>SourceInitiated</SubscriptionType>
-  <Description>Window Management Instrumentation events.</Description>
+  <Description>Events related to Active Directory Federation Services.</Description>
   <Enabled>true</Enabled>
   <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
   <ConfigurationMode>Custom</ConfigurationMode>
   <Delivery Mode="Push">
     <Batching>
       <MaxItems>5</MaxItems>
-      <MaxLatencyTime>300000</MaxLatencyTime>
+      <MaxLatencyTime>900000</MaxLatencyTime>
     </Batching>
     <PushSettings>
       <Heartbeat Interval="1800000"/>
@@ -16,21 +16,24 @@
   </Delivery>
   <Query><![CDATA[
     <QueryList>
-      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
-      <Query Id="0" Path="Microsoft-Windows-WMI-Activity/Operational">
-        <Select Path="Microsoft-Windows-WMI-Activity/Operational">*</Select>
+      <Query Id="0" Path="Security">
+        <Select Path="Security">*[System[Provider[@Name='AD FS Auditing']]]</Select>
       </Query>
-      <Query Id="1" Path="Microsoft-Windows-TPM-WMI">
-        <!-- 513: TPM Owner Authorization information was backed up successfully to Active Directory Domain Services. -->
-        <!-- 514: Failed to backup TPM Owner Authorization information to Active Directory Domain Services. -->
-        <Select Path="Microsoft-Windows-TPM-WMI">*</Select>
-     </Query>
+      <Query Id="1" Path="AD FS/Admin">
+        <Select Path="AD FS/Admin">*[System[Provider[@Name='AD FS']]]</Select>
+      </Query>
+      <Query Id="2" Path="AD FS Tracing/Debug">
+        <Select Path="AD FS Tracing/Debug">*</Select>
+      </Query>
+      <Query Id="3" Path="Duo Authentication for AD FS">
+        <Select Path="Duo Authentication for AD FS">*</Select>
+      </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
   <TransportName>http</TransportName>
   <ContentFormat>RenderedText</ContentFormat>
   <Locale Language="en-US"/>
-  <LogFile>WEC-WMI</LogFile>
+  <LogFile>WEC6-ADFS</LogFile>
   <AllowedSourceNonDomainComputers/>
   <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
 </Subscription>

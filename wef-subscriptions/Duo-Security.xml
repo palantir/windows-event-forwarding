@@ -1,14 +1,14 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
-  <SubscriptionId>WMI</SubscriptionId>
+  <SubscriptionId>Duo-Security</SubscriptionId>
   <SubscriptionType>SourceInitiated</SubscriptionType>
-  <Description>Window Management Instrumentation events.</Description>
+  <Description>Duo Security Authentication Events.</Description>
   <Enabled>true</Enabled>
   <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
   <ConfigurationMode>Custom</ConfigurationMode>
   <Delivery Mode="Push">
     <Batching>
-      <MaxItems>5</MaxItems>
-      <MaxLatencyTime>300000</MaxLatencyTime>
+      <MaxItems>1</MaxItems>
+      <MaxLatencyTime>900000</MaxLatencyTime>
     </Batching>
     <PushSettings>
       <Heartbeat Interval="1800000"/>
@@ -16,21 +16,16 @@
   </Delivery>
   <Query><![CDATA[
     <QueryList>
-      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
-      <Query Id="0" Path="Microsoft-Windows-WMI-Activity/Operational">
-        <Select Path="Microsoft-Windows-WMI-Activity/Operational">*</Select>
+      <Query Id="0" Path="Application">
+        <!-- Duo Security Events -->
+        <Select Path="Application">*[System[Provider[@Name='Duo Security']]]</Select>
       </Query>
-      <Query Id="1" Path="Microsoft-Windows-TPM-WMI">
-        <!-- 513: TPM Owner Authorization information was backed up successfully to Active Directory Domain Services. -->
-        <!-- 514: Failed to backup TPM Owner Authorization information to Active Directory Domain Services. -->
-        <Select Path="Microsoft-Windows-TPM-WMI">*</Select>
-     </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
   <TransportName>http</TransportName>
   <ContentFormat>RenderedText</ContentFormat>
   <Locale Language="en-US"/>
-  <LogFile>WEC-WMI</LogFile>
+  <LogFile>WEC6-Duo-Security</LogFile>
   <AllowedSourceNonDomainComputers/>
   <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
 </Subscription>
