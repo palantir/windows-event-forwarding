@@ -47,7 +47,7 @@ If you're like us and don't trust random DLLs, feel free to use our manifest fil
 * **WEC5-Log-Deletion-Security**: Event channel for collecting log deletion events.
 * **WEC5-Log-Deletion-System**: Event channel for collecting log deletion events.
 * **WEC5-Autoruns**: Event channel for collecting Autoruns-To-Wineventlog events.
-* **WEC6-Sysmon-Operational**: Event channel for collecting Sysinternals Sysmon events.
+* **WEC6-Sysmon**: Event channel for collecting Sysinternals Sysmon events.
 * **WEC6-Software-Restriction-Policies**: Event channel for collecting Software Restriction Policy events.
 
 ## Pre-Requisites:

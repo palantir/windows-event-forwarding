@@ -17,7 +17,6 @@ $autorunsCsv = "c:\Program Files\AutorunsToWinEventLog\AutorunsOutput.csv"
 # -a *         Record all entries
 # -c           Output as CSV
 # -h           Show file hashes
-# -m           Hide Microsoft signed entries
 # -s           Verify digital signatures
 # -v           Query file hashes againt Virustotal (no uploading)
 # -vt          Accept Virustotal Terms of Service
@@ -25,7 +24,7 @@ $autorunsCsv = "c:\Program Files\AutorunsToWinEventLog\AutorunsOutput.csv"
 
 ## Normally we'd add a "-Wait" flag to this Start-Process, but it seems to be
 ## broken when called from RunAs or Scheduled Tasks: https://goo.gl/8NcvcK
-$proc = Start-Process -FilePath "c:\Program Files\AutorunsToWinEventLog\Autorunsc64.exe" -ArgumentList '-nobanner', '/accepteula', '-a *', '-c', '-h', '-m', '-s', '-v', '-vt', '*'  -RedirectStandardOut $autorunsCsv -WindowStyle hidden -Passthru
+$proc = Start-Process -FilePath "c:\Program Files\AutorunsToWinEventLog\Autorunsc64.exe" -ArgumentList '-nobanner', '/accepteula', '-a *', '-c', '-h', '-s', '-v', '-vt', '*'  -RedirectStandardOut $autorunsCsv -WindowStyle hidden -Passthru
 $proc.WaitForExit()
 $autorunsArray = Import-Csv $autorunsCsv
 
