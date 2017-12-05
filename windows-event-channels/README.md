@@ -49,6 +49,11 @@ If you're like us and don't trust random DLLs, feel free to use our manifest fil
 * **WEC5-Autoruns**: Event channel for collecting Autoruns-To-Wineventlog events.
 * **WEC6-Sysmon**: Event channel for collecting Sysinternals Sysmon events.
 * **WEC6-Software-Restriction-Policies**: Event channel for collecting Software Restriction Policy events.
+* **WEC6-Microsoft-Office**: Event channel for collecting Microsoft Office events.
+* **WEC6-Exploit-Guard**: Event channel for collecting Exploit Guard events.
+* **WEC6-Duo-Security**: Event channel for collecting Duo Security events.
+* **WEC6-Device-Guard**: Event channel for collecting Device Guard events.
+* **WEC6-ADFS**: Event channel for collecting Active Directory Federation Services events.
 
 ## Pre-Requisites:
 You will need the following software to build the DLL:
