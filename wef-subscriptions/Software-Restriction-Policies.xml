@@ -1,7 +1,7 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
   <SubscriptionId>Software-Restriction-Policies</SubscriptionId>
   <SubscriptionType>SourceInitiated</SubscriptionType>
-  <Description>SRP Logs from within the System log</Description>
+  <Description>SRP Logs from within the Application log</Description>
   <Enabled>true</Enabled>
   <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
   <ConfigurationMode>Custom</ConfigurationMode>
@@ -16,7 +16,7 @@
   </Delivery>
   <Query><![CDATA[
     <QueryList>
-      <Query Id="0" Path="System">
+      <Query Id="0" Path="Application">
         <!-- 865: SRP - Blocked by default disallow rule -->
         <!-- 866: SRP - Blocked by path rule -->
         <!-- 867: SRP - Blocked by publisher rule -->
@@ -24,7 +24,7 @@
         <!-- 882: SRP - Blocked, but no UI acknowledgement shown -->
         <!-- Event ID descriptions thanks to Application Whitelisting using Software Restriction Policies by IAD 
              http://www.isssource.com/wp-content/uploads/2012/02/ISSSource-Application_Whitelisting_Using_SRP.pdf -->
-        <Select Path="System">*[System[Provider[@Name='Microsoft-Windows-SoftwareRestrictionPolicies'] and (EventID=865 or EventID=866 or EventID=867 or EventID=868 or EventID=882)]]</Select>
+        <Select Path="Application">*[Application[Provider[@Name='Microsoft-Windows-SoftwareRestrictionPolicies'] and (EventID=865 or EventID=866 or EventID=867 or EventID=868 or EventID=882)]]</Select>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
