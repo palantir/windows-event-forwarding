@@ -23,7 +23,8 @@
       </Query>
       <Query Id="1" Path="Security">
         <!-- Windows Code Integrity Checks (Invalid hashes) -->
-        <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and (Level=0 or Level=4) and (EventID=5038 or EventID=6281)]]</Select>
+        <!-- Code integrity determined that a file does not meet the security requirements to load into a process. -->
+        <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and (Level=0 or Level=4) and (EventID=5038 or EventID=6281 or EventID=6410)]]</Select>
       </Query>
       </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>

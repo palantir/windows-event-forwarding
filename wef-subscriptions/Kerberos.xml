@@ -18,13 +18,13 @@
     <QueryList>
       <!-- Inspired by Microsoft Documentation and/or IADGOV -->
       <Query Id="0" Path="Security">
-        <!-- 4713 - A Kerberos policy was changed -->
         <!-- 4768 - A Kerberos authentication ticket (TGT) was requested -->
         <!-- 4769 - A Kerberos service ticket was requested -->
         <!-- 4770 - A Kerberos service ticket was renewed -->
         <!-- 4771 - A Kerberos pre-authentication failed. -->
         <!-- 4772 - A Kerberos authentication ticket request failed. -->
-        <Select Path="Security">*[System[(EventID=4713 or EventID=4768 or EventID=4769 or EventID=4770 or EventID=4771 or EventID=4772)]]</Select>
+        <!-- 4773 - A Kerberos service ticket request failed. -->
+        <Select Path="Security">*[System[(EventID=4768 or EventID=4769 or EventID=4770 or EventID=4771 or EventID=4772 or EventID=4773)]]</Select>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>

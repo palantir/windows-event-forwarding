@@ -32,14 +32,12 @@ This repository is organized as follows:
 7. Start collecting data and hunting badness.
 
 ## Contributing
-Contributions, fixes, and improvements can be submitted directly against this project as a GitHub issue or pull request. 
-When contributing an update to CustomEventChannels.man, please do not include the compiled .DLL for security reasons. 
-Once your pull request has been merged, we will compile the updated manifest into a DLL and add it to the repository.
+Contributions, fixes, and improvements can be submitted directly against this project as a GitHub issue or pull request. When contributing an update to CustomEventChannels.man, please do not include the compiled .DLL for security reasons. Once your pull request has been merged, we will compile the updated manifest into a DLL and add it to the repository. 
 
 ## License
 MIT License
 
-Copyright (c) 2017 Palantir Technologies Inc.
+Copyright (c) 2018 Palantir Technologies Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

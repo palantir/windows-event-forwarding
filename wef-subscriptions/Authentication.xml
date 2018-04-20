@@ -20,12 +20,31 @@
       <Query Id="0" Path="Security">
         <!-- 4624: An account was successfully logged on. -->
         <!-- 4625: An account failed to log on. -->
+        <!-- 4626: User/Device claims information. -->
+        <Select Path="Security">*[System[(EventID &gt;=4624 and EventID &lt;=4626)]]</Select>
         <!-- 4634: An account was successfully logged off. -->
+        <!-- 4647: User initiated logoff. -->
+        <!-- 4649: A replay attack was detected. -->
         <!-- 4672: Special privileges assigned to a new logon, administrative logins -sa, -ada, etc. -->
+        <!-- 4675: SIDs were filtered. -->
+        <Select Path="Security">*[System[(EventID=4634 or EventID=4647 or EventID=4649 or EventID=4672 or EventID=4675)]]</Select>
+        <!-- 4774: An account was mapped for logon. -->
         <!-- 4775: An account could not be mapped for logon. -->
+        <!-- 4776: The computer attempted to validate the credentials for an account. -->
         <!-- 4777: The domain controller failed to validate the credentials for an account. -->
+        <!-- 4778: A session was reconnected to a Window Station. -->
+        <!-- 4779: A session was disconnected from a Window Station. -->
+        <Select Path="Security">*[System[(EventID &gt;=4774 and EventID &lt;=4779)]]</Select>
+        <!-- 4800 The workstation was locked. -->
+        <!-- 4801 The workstation was unlocked. -->
+        <!-- 4802 The screen saver was invoked. -->
+        <!-- 4803 The screen saver was dismissed. -->
+        <Select Path="Security">*[System[(EventID &gt;=4800 and EventID &lt;=4803)]]</Select>
+        <!-- 4964: Special groups have been assigned a new logon. -->
+        <Select Path="Security">*[System[(EventID=4964)]]</Select>
+        <!-- 5378 The requested credentials delegation was disallowed by policy. -->
+        <Select Path="Security">*[System[(EventID=5378)]]</Select>
         <!-- Suppress SECURITY_LOCAL_SYSTEM_RID A special account used by the OS, noisy -->
-        <Select Path="Security">*[System[(EventID=4624 or EventID=4625 or EventID=4634 or EventID=4672 or EventID=4775 or EventID=4777)]]</Select>
         <Suppress Path="Security">*[EventData[Data[1]="S-1-5-18"]]</Suppress>
       </Query>
     </QueryList>]]></Query>

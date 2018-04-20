@@ -29,6 +29,6 @@ $proc.WaitForExit()
 $autorunsArray = Import-Csv $autorunsCsv
 
 Foreach ($item in $autorunsArray) {
-  $item = $(Write-Output $item  | Out-String -Width 1000)
+  $item = $(Write-Output $item  | Out-String)
   Write-EventLog -LogName Autoruns -Source AutorunsToWinEventLog -EntryType Information -EventId 1 -Message $item
 }

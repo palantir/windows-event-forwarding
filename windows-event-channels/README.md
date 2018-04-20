@@ -2,10 +2,10 @@
 As described in the blog post [Creating Custom Windows Event Forwarding Logs](https://blogs.technet.microsoft.com/russellt/2016/05/18/creating-custom-windows-event-forwarding-logs/), WEF can be extended with additional custom event channels. Extending the number of event channels available provides a few primary benefits:
 
 * Each event channel can have an independent maximum size and rotation strategy.
-* Each event channel can be used as a unique identifier for tagging data for ingestion into a SIEM. 
-* Event channels may be placed on different disks or storage devices for improving disk I/O. 
+* Each event channel can be used as a unique identifier for tagging data for ingestion into a SIEM.
+* Event channels may be placed on different disks or storage devices for improving disk I/O.
 
-The Event Channel manifest provided in this project consists of 16 individual providers, each with 7 channels. Channels follow a standard naming scheme of WEC[#], where the number is related to the provider. 
+The Event Channel manifest provided in this project consists of 16 individual providers, each with 7 channels. Channels follow a standard naming scheme of WEC[#], where the number is related to the provider.
 
 Once the Event Channel manifest has been compiled into a DLL, it is loaded onto the WEC server, where it will register and create the appropriate channels and log files.
 
@@ -20,7 +20,7 @@ If you're like us and don't trust random DLLs, feel free to use our manifest fil
 * **WEC-Process-Execution**: Event channel for collecting process creation/termination events.
 * **WEC-Code-Integrity**: Event channel for collecting device guard and code integrity events.
 * **WEC2-Registry**: Event channel for collecting registry audit events.
-* **WEC2-File-System**: Event channel for collecting filesystem audit events.
+* **WEC2-Object-Manipulation**: Event channel for collecting object audit events.
 * **WEC2-Applocker**: Event channel for collecting applocker events.
 * **WEC2-Task-Scheduler**: Event channel for collecting scheduled task and at events.
 * **WEC2-Application-Crashes**: Event channel for collecting application crash events.
@@ -30,7 +30,7 @@ If you're like us and don't trust random DLLs, feel free to use our manifest fil
 * **WEC3-Account-Management**: Event channel for collecting account management events.
 * **WEC3-Windows-Diagnostics**: Event channel for collecting diagnostic events.
 * **WEC3-Smart-Card**: Event channel for collecting smart card events.
-* **WEC3-USB**: Event channel for collecting USB events.
+* **WEC3-External-Devices**: Event channel for collecting USB and external device events.
 * **WEC3-Print**: Event channel for collecting printer and print job events.
 * **WEC3-Firewall**: Event channel for collecting firewall events.
 * **WEC4-Wireless**: Event channel for collecting 802.1 wireless events.
@@ -47,13 +47,16 @@ If you're like us and don't trust random DLLs, feel free to use our manifest fil
 * **WEC5-Log-Deletion-Security**: Event channel for collecting log deletion events.
 * **WEC5-Log-Deletion-System**: Event channel for collecting log deletion events.
 * **WEC5-Autoruns**: Event channel for collecting Autoruns-To-Wineventlog events.
-* **WEC6-Sysmon**: Event channel for collecting Sysinternals Sysmon events.
-* **WEC6-Software-Restriction-Policies**: Event channel for collecting Software Restriction Policy events.
-* **WEC6-Microsoft-Office**: Event channel for collecting Microsoft Office events.
 * **WEC6-Exploit-Guard**: Event channel for collecting Exploit Guard events.
 * **WEC6-Duo-Security**: Event channel for collecting Duo Security events.
 * **WEC6-Device-Guard**: Event channel for collecting Device Guard events.
 * **WEC6-ADFS**: Event channel for collecting Active Directory Federation Services events.
+* **WEC6-Sysmon**: Event channel for collecting Sysinternals Sysmon events.
+* **WEC6-Software-Restriction-Policies**: Event channel for collecting Software Restriction Policy events.
+* **WEC6-Microsoft-Office**: Event channel for collecting Microsoft Office events.
+* **WEC7-Active-Directory**: Event channel for collecting Active Directory change events.
+* **WEC7-Terminal-Services**: Event channel for collecting Terminal Services and Terminal Services Gateway events.
+* **WEC7-Privilege-Use**: Event channel for collecting privilege events.
 
 ## Pre-Requisites:
 You will need the following software to build the DLL:
@@ -81,7 +84,7 @@ To compile, perform the following from a cmd.exe shell:
 "C:\Program Files (x86)\Windows Kits\10\bin\x64\mc.exe" CustomEventChannels.man
 "C:\Program Files (x86)\Windows Kits\10\bin\x64\mc.exe" -css CustomEventChannels.DummyEvent CustomEventChannels.man
 "C:\Program Files (x86)\Windows Kits\10\bin\x64\rc.exe" CustomEventChannels.rc
-"csc.exe" /win32res:CustomEventChannels.res /unsafe /target:library /out:CustomEventChannels.dll C:CustomEventChannels.cs
+"C:\Windows\Microsoft.NET\Framework64\v4.x.x\csc.exe" /win32res:CustomEventChannels.res /unsafe /target:library /out:CustomEventChannels.dll C:CustomEventChannels.cs
 ```
 
 ## Deployment:
@@ -116,8 +119,8 @@ wevtutil im C:\windows\system32\CustomEventChannels.man
 6) Resize the log files:
 ```
 $xml = wevtutil el | select-string -pattern "WEC"
-    foreach ($subscription in $xml) { 
-      wevtutil sl $subscription /ms:4194304 
+    foreach ($subscription in $xml) {
+      wevtutil sl $subscription /ms:4194304
     }
 ```
 

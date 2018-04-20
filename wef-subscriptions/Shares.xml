@@ -19,17 +19,23 @@
       <!-- Inspired by Microsoft Documentation and/or IADGOV -->
       <Query Id="0" Path="Security">
         <!-- 5140: Network share object access -->
-        <!-- 5145: A network share object was checked to see whether client can be granted desired access -->
-        <Select Path="Security">*[System[(EventID=5140 or EventID=5145)]]</Select>
-      </Query>
-      <Query Id="1" Path="Security">
         <!-- 5142: Network Share create -->
         <!-- 5144: Network Share Delete -->
-        <Select Path="Security">*[System[(EventID=5142 or EventID=5144)]]</Select>
+        <!-- 5145: A network share object was checked to see whether client can be granted desired access -->
+        <!-- 5168: SPN check for SMB/SMB2 failed. -->
+        <Select Path="Security">*[System[(EventID=5140 or EventID=5142 or EventID=5144 or EventID=5145 or EventID=5168)]]</Select>
       </Query>
-      <Query Id="2" Path="Microsoft-Windows-SMBClient/Operational">
+      <Query Id="1" Path="Microsoft-Windows-SMBClient/Operational">
         <!-- All UNC/mapped drive successful connection -->
         <Select Path="Microsoft-Windows-SMBClient/Operational">*[System[(EventID=30622 or EventID=30624)]]</Select>
+      </Query>
+      <Query Id="2" Path="Microsoft-Windows-SMBClient/Security">
+        <!-- All SMB Client Security Alerts -->
+        <Select Path="Microsoft-Windows-SMBClient/Security">*</Select>
+      </Query>
+      <Query Id="3" Path="Microsoft-Windows-SMBServer/Security">
+        <!-- All SMB Server Security Alerts -->
+        <Select Path="Microsoft-Windows-SMBServer/Security">*</Select>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
