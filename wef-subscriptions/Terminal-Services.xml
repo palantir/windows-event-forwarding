@@ -1,0 +1,68 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Terminal-Services</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Terminal Services Events.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>5</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" Path="Microsoft-Windows-TerminalServices-Gateway/Admin">
+        <!-- All TSG Admin Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-Gateway/Admin">*</Select>
+      </Query>
+      <Query Id="1" Path="Microsoft-Windows-TerminalServices-Gateway/Operational">
+        <!-- All TSG Operational Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-Gateway/Operational">*</Select>
+      </Query>
+      <Query Id="2" Path="Microsoft-Windows-TerminalServices-ClientUSBDevices/Admin">
+        <!-- All TSG Client USB Device Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-ClientUSBDevices/Admin">*</Select>
+      </Query>
+      <Query Id="3" Path="Microsoft-Windows-TerminalServices-ClientUSBDevices/Operational">
+        <!-- All TSG Client USB Device Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-ClientUSBDevices/Operational">*</Select>
+      </Query>
+      <Query Id="4" Path="Microsoft-Windows-TerminalServices-PnPDevices/Admin">
+        <!-- All TSG Client USB PNP Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-PnPDevices/Admin">*</Select>
+      </Query>
+      <Query Id="5" Path="Microsoft-Windows-TerminalServices-PnPDevices/Operational">
+        <!-- All TSG Client USB PNP Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-PnPDevices/Operational">*</Select>
+      </Query>
+      <Query Id="6" Path="Microsoft-Windows-TerminalServices-Printers/Admin">
+        <!-- All TSG Printer Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-Printers/Admin">*</Select>
+      </Query>
+      <Query Id="7" Path="Microsoft-Windows-TerminalServices-Printers/Operational">
+        <!-- All TSG Printer Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-Printers/Operational">*</Select>
+      </Query>
+      <Query Id="8" Path="Microsoft-Windows-TerminalServices-ServerUSBDevices/Admin">
+        <!-- All TSG Server USB Device Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-ServerUSBDevices/Admin">*</Select>
+      </Query>
+      <Query Id="9" Path="Microsoft-Windows-TerminalServices-ServerUSBDevices/Operational">
+        <!-- All TSG Server USB Device Events -->
+        <Select Path="Microsoft-Windows-TerminalServices-ServerUSBDevices/Operational">*</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC7-Terminal-Services</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

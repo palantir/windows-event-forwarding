@@ -1,7 +1,7 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
-  <SubscriptionId>USB</SubscriptionId>
+  <SubscriptionId>External-Devices</SubscriptionId>
   <SubscriptionType>SourceInitiated</SubscriptionType>
-  <Description>Detection of insertion and removal of USB Mass Storage devices.</Description>
+  <Description>Detection of insertion and removal of USB and other External devices.</Description>
   <Enabled>true</Enabled>
   <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
   <ConfigurationMode>Custom</ConfigurationMode>
@@ -23,12 +23,24 @@
         <!-- 400, 410: New Mass Storage Device Installation -->
         <Select Path="Microsoft-Windows-Kernel-PnP/Configuration">*[System[Provider[@Name='Microsoft-Windows-Kernel-PnP'] and Level=4 and (EventID=400 or EventID=410)]] and *[EventData[Data[@Name='DriverName']=&quot;usbstor.inf&quot;]] </Select>
       </Query>
+      <!-- PNP Activity -->
+      <Query Id="1" Path="Security">
+        <!-- 6416: A new external device was recognized by the System. -->
+        <!-- 6419: A request was made to disable a device. -->
+        <!-- 6420: A device was disabled. -->
+        <!-- 6421: A request was made to enable a device. -->
+        <!-- 6422: A device was enabled.. -->
+        <!-- 6423: The installation of this device is forbidden by system policy. -->
+        <!-- 6424: The installation of this device was allowed after having previously been forbidden by policy. -->
+        <Select Path="Security">*[System[(EventID=6416)]]</Select>
+        <Select Path="Security">*[System[(EventID &gt;=6419 and EventID &lt;=6424)]]</Select>
+  </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
   <TransportName>http</TransportName>
   <ContentFormat>RenderedText</ContentFormat>
   <Locale Language="en-US"/>
-  <LogFile>WEC3-USB</LogFile>
+  <LogFile>WEC3-External-Devices</LogFile>
   <AllowedSourceNonDomainComputers/>
   <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
 </Subscription>

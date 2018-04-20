@@ -17,20 +17,25 @@
   <Query><![CDATA[
     <QueryList>
       <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <!-- Startup events -->
       <Query Id="0" Path="System">
         <!-- System startup (12 - includes OS/SP/Version) and shutdown -->
+        <!-- 4608: Windows is starting up -->
         <Select Path="System">*[System[Provider[@Name='Microsoft-Windows-Kernel-General'] and (EventID=12 or EventID=13)]]</Select>
+        <Select Path="Security">*[System[(EventID=4608)]]</Select>
       </Query>
+      <!-- Shutdown events -->
       <Query Id="1" Path="System">
         <!-- Shutdown initiate requests, with user, process and reason (if supplied) -->
         <Select Path="System">*[System[Provider[@Name='USER32'] and (EventID=1074)]]</Select>
       </Query>
+      <!-- OS-level security events -->
       <Query Id="2" Path="Security">
-        <!-- 4816: RPC detected an integrity violation while decrypting an incoming message. -->
         <!-- 4817: Auditing settings on object were changed. -->
         <!-- 4826 Boot Configuration Data loaded. -->
-        <Select Path="Security">*[System[(EventID=4816 or EventID=4817 or EventID=4826)]]</Select>
+        <Select Path="Security">*[System[(EventID=4817 or EventID=4826)]]</Select>
       </Query>
+      <!-- SAM database events -->
       <Query Id="3" Path="System">
         <!-- 16962: A remote call to the SAM database has been denied -->
         <!-- 16965: Remote calls to the SAM database have been denied in the past 900 seconds throttling window -->
@@ -39,17 +44,41 @@
         <!-- EventID 16965 is enabled via a registry key: https://goo.gl/1qXKZL -->
         <Select Path="System">*[System[(EventID=16962 or EventID=16965 or EventID=16968 or EventID=16969)]]</Select>
       </Query>
+      <!-- SMBv1 events -->
       <Query Id="4" Path="Microsoft-Windows-SMBServer/Audit">
         <!-- NOTE: The ACL for Microsoft-Windows-SMBServer/Audit may need to be updated to allow read access by Event Log Readers -->
-        <!-- This EventID only exists in WinServer2016 and Win10 -->
+        <!-- This EventID only exists in Server2016, Win10 and newer -->
         <!-- 3000: Client attempted to use SMBv1  -->
         <Select Path="Microsoft-Windows-SMBServer/Audit">*[System[Provider[@Name='Microsoft-Windows-SMBServer'] and (EventID=3000)]]</Select>
       </Query>
+      <!-- System error/crash events -->
       <Query Id="5" Path="System">
         <!-- 41: The system has rebooted without cleanly shutting down first -->
         <!-- 1001: Application crashes, hangs, and generic reports  -->
+        <!-- 4621: Administrator recovered system from CrashOnAuditFail. -->
         <!-- 6008: The previous system shutdown was unexpected. -->
-        <Select Path="System">*[System[(EventID=41 or EventID=1001 or EventID=6008)]]</Select>
+        <Select Path="System">*[System[(EventID=41 or EventID=1001 or EventID=6008 or EventID=4621)]]</Select>
+      </Query>
+      <!-- Security system extensions -->
+      <Query Id="6" Path="Security">
+        <!-- 4610: An authentication package has been loaded by the Local Security Authority. -->
+        <!-- 4611: A trusted logon process has been registered with the Local Security Authority. -->
+        <!-- 4614: A notification package has been loaded by the Security Account Manager. -->
+        <!-- 4622: A security package has been loaded by the Local Security Authority. -->
+        <!-- 4697: A service was installed in the system. -->
+        <Select Path="Security">*[System[(EventID=4610 or EventID=4611 or EventID=4614 or EventID=4622 or EventID=4697)]]</Select>
+      </Query>
+      <!-- OS Policy Changes -->
+      <Query Id="7" Path="Security">
+        <!-- 4719: System audit policy was changed. -->
+        <!-- 4817: A trusted logon process has been registered with the Local Security Authority. -->
+        <!-- 4902: The Per-user audit policy table was created. -->
+        <!-- 4906: The CrashOnAuditFail value has changed. -->
+        <!-- 4908: Special Groups Logon table modified. -->
+        <!-- 4912: Per User Audit Policy was changed. -->
+        <!-- 4904: An attempt was made to register a security event source.. -->
+        <!-- 4905: An attempt was made to unregister a security event source.. -->
+        <Select Path="Security">*[System[(EventID=4719 or EventID=4817 or EventID=4902 or EventID=4906 or EventID=4908 or EventID=4912 or EventID=4904 or EventID=4905)]]</Select>
       </Query>
     </QueryList>]]></Query>
     <ReadExistingEvents>true</ReadExistingEvents>

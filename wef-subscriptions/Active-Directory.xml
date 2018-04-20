@@ -1,0 +1,57 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Active-Directory</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Events pertaining to changes in active directory.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>1</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <Query Id="0" Path="Security">
+        <!-- 4662: Directory Service Access Operation Performed On An Object --> 
+        <Select Path="Security">*[System[(EventID=4662)]] and *[System[Task='14080']]</Select>
+      </Query>
+      <Query Id="1" Path="Security">
+        <!-- 5136: A directory service object was modified. --> 
+        <!-- 5137: A directory service object was created. --> 
+        <!-- 5138: A directory service object was undeleted. --> 
+        <!-- 5139: A directory service object was moved. --> 
+        <!-- 5141: A directory service object was deleted. --> 
+        <Select Path="Security">*[System[(EventID=5136 or EventID=5137 or EventID=5178 or EventID=5139 or EventID=5141)]]</Select>
+      </Query>
+      <Query Id="2" Path="Security">
+        <!-- 4713: Kerberos Policy was changed. -->
+        <Select Path="Security">*[System[(EventID=4713)]]</Select>
+      </Query>
+      <Query Id="3" Path="Security">
+        <!-- 4706: A new trust was created to a domain. -->
+        <!-- 4707: A trust to a domain was removed. -->
+        <!-- 4716: Trusted domain information was modified. -->
+        <!-- 4717: System security access was granted to an account. -->
+        <!-- 4718: System security access was removed from an account. -->
+        <!-- 4739: Domain Policy was changed. -->
+        <!-- 4864: A namespace collision was detected. -->
+        <!-- 4865: A trusted forest information entry was added. -->
+        <!-- 4866: A trusted forest information entry was removed. -->
+        <!-- 4867: A trusted forest information entry was modified. -->
+        <Select Path="Security">*[System[(EventID=4706 or EventID=4707 or EventID=4716 or EventID=4717 or EventID=4718 or EventID=4739 or EventID=4864 or EventID=4865 or EventID=4866 or EventID=4867)]]</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC7-Active-Directory</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>

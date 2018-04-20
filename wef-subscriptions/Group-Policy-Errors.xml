@@ -25,6 +25,12 @@
         <!-- 1129: Group Policy Preprocessing Networking -->
         <Select Path="System">*[System[Provider[@Name='Microsoft-Windows-GroupPolicy'] and Level=2 and (EventID=1085 or EventID=1125 or EventID=1127 or EventID=1129)]]</Select>
       </Query>
+      <Query Id="1" Path="Security">
+        <!-- Group Policy Info -->
+        <!-- 6144: Security policy in the group policy objects has been applied successfully. -->
+        <!-- 6145: One or more errors occurred while processing security policy in the group policy objects. -->
+        <Select Path="Security">*[System[(EventID=6144 or EventID=6145)]]</Select>
+      </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
   <TransportName>http</TransportName>

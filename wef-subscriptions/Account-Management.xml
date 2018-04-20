@@ -20,6 +20,10 @@
       <Query Id="0" Path="Security">
         <!-- 4627: Group Membership Information -->
         <Select Path="Security">*[System[(EventID=4627)]]</Select>
+        <!-- 4703: A user right was adjusted. -->
+        <!-- 4704: A user right (privilege) was assigned. -->
+        <!-- 4704: A user right (privilege) was removed. -->
+        <Select Path="Security">*[System[(EventID=4703 or EventID=4704 or EventID=4705)]]</Select>
         <!-- 4720: A user account was created. -->
         <Select Path="Security">*[System[(EventID=4720)]]</Select>
         <!-- 4722: A user account was enabled. -->
@@ -35,25 +39,53 @@
         <!-- 4732: A member was added to a security-enabled local group. -->
         <!-- 4733: A member was removed from a security-enabled local group. -->
         <!-- 4734: A security-enabled local group was deleted. -->
+        <!-- 4735: Modification of Security-enabled groups -->
         <!-- 4737: A security-enabled global group was changed. -->
         <!-- 4738: A user account was changed. -->
         <!-- 4739: Domain Policy was changed. -->
+        <!-- 4741: A computer account was created. -->
+        <!-- 4742: A computer account was changed. -->
+        <!-- 4743: A computer account was deleted. -->
+        <!-- 4744: A security-disabled local group was created. -->
+        <!-- 4745: A security-disabled local group was changed. -->
+        <!-- 4746: A member was added to a security-disabled local group. -->
+        <!-- 4747: A member was removed from a security-disabled local group. -->
+        <!-- 4748: A security-disabled local group was deleted. -->
+        <!-- 4749: A security-disabled global group was created. -->
+        <!-- 4750: A security-disabled global group was changed. -->
+        <!-- 4751: A member was added to a security-disabled global group. -->
+        <!-- 4752: A member was removed from a security-disabled global group. -->
+        <!-- 4753: A security-disabled global group was deleted. -->
+        <!-- 4754: A security-enabled universal group was created. -->
         <!-- 4755: A security-enabled universal group was changed. -->
         <!-- 4756: A security-enabled universal group was changed. -->
         <!-- 4757: A security-enabled universal group was changed. -->
+        <!-- 4758: A security-enabled universal group was created. -->
+        <!-- 4759: A security-disabled universal group was created. -->
+        <!-- 4760: A security-disabled universal group was changed. -->
+        <!-- 4761: A member was added to a security-disabled universal group. -->
+        <!-- 4762: A member was removed from a security-disabled universal group. -->
+        <!-- 4763: A security-disabled universal group was deleted. -->
         <!-- 4764: A group's type was changed. -->
         <!-- 4765: SID History was added to an account. -->
         <!-- 4766: An attempt to add SID History to an account failed. -->
         <!-- 4767: A user account was unlocked. -->
-        <Select Path="Security">*[System[(EventID &gt;=4722 and EventID &lt;=4734)]]</Select>
+        <Select Path="Security">*[System[(EventID &gt;=4722 and EventID &lt;=4735)]]</Select>
         <Select Path="Security">*[System[(EventID &gt;=4737 and EventID &lt;=4739)]]</Select>
-        <Select Path="Security">*[System[(EventID &gt;=4755 and EventID &lt;=4757)]]</Select>
-        <Select Path="Security">*[System[(EventID &gt;=4764 and EventID &lt;=4767)]]</Select>
-        <!-- 4704: A user right (privilege) was assigned. -->
+        <Select Path="Security">*[System[(EventID &gt;=4741 and EventID &lt;=4767)]]</Select>
         <!-- 4780: The ACL was set on accounts which are members of administrators group. -->
-        <Select Path="Security">*[System[(EventID=4704 or EventID=4782)]]</Select>
-        <!-- 4735: Modification of Security-enabled groups -->
-        <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and EventID=4735]]</Select>
+        <!-- 4781: The name of an account was changed. -->
+        <!-- 4782: The password hash an account was accessed. -->
+        <Select Path="Security">*[System[(EventID &gt;=4780 and EventID &lt;=4782)]]</Select>
+        <!-- 4793: The Password Policy Checking API was called. -->
+        <!-- 4794: An attempt was made to set the Directory Services Restore Mode administrator password. -->
+        <Select Path="Security">*[System[(EventID=4793 or EventID=4794)]]</Select>
+        <!-- 4798: A user's local group membership was enumerated. -->
+        <!-- 4799: A security-enabled local group membership was enumerated. -->
+        <Select Path="Security">*[System[(EventID=4798 or EventID=4799)]]</Select>
+        <!-- 5376: Credential Manager credentials were backed up. -->
+        <!-- 5377: Credential Manager credentials were restored from a backup. -->
+        <Select Path="Security">*[System[(EventID=5376 or EventID=5377)]]</Select>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>

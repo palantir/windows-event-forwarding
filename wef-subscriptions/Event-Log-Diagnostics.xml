@@ -20,6 +20,13 @@
       <Query Id="0" Path="System">
         <!-- Event log service events -->
         <Select Path="System">*[System[Provider[@Name='Microsoft-Windows-Eventlog']]]</Select>
+      </Query>
+      <Query Id="1" Path="Security">
+        <!-- 1100: The event logging service has shut down. -->
+        <!-- 1104: The security log is now full. -->
+        <!-- 1105: Event log automatic backup. -->
+        <!-- 1108: The event logging service encountered an error while processing an incoming event published from %1 -->
+        <Select Path="Security">*[System[(EventID=1100 or EventID=1104 OR EventID=1105 OR EventID=1108)]]</Select>
     </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>

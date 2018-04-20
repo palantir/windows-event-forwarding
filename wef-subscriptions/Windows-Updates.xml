@@ -19,7 +19,7 @@
       <!-- Inspired by Microsoft Documentation and/or IADGOV -->
       <Query Id="0" >
         <!-- Windows Update Service Errors -->
-        <Select Path="Microsoft-Windows-WindowsUpdateClient/Operational">*[System[Provider[@Name='Microsoft-Windows-WindowsUpdateClient'] and Level=2 and (EventID=20 or EventID=24 or EventID=25 or EventID=31 or EventID=34 or EventID=35)]]</Select>
+        <Select Path="Microsoft-Windows-WindowsUpdateClient/Operational">*[System[Provider[@Name='Microsoft-Windows-WindowsUpdateClient'] and Level=2 and (EventID=19 or EventID=20 or EventID=24 or EventID=25 or EventID=31 or EventID=34 or EventID=35)]]</Select>
         <!-- Hotpatching Errors -->
         <Select Path="Setup">*[System[Provider[@Name='Microsoft-Windows-Servicing'] and Level=0 and EventID=1009]]</Select>
       </Query>

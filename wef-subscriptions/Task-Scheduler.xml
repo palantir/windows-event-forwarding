@@ -23,8 +23,10 @@
       <Query Id="1" Path="Security">
         <!-- 4698: A scheduled task was created -->
         <!-- 4699: A scheduled task was deleted -->
+        <!-- 4700: A scheduled task was enabled -->
+        <!-- 4701: A scheduled task was disabled -->
         <!-- 4702: A scheduled task was updated -->
-        <Select Path="Security">*[System[(EventID=4698 or EventID=4699 or EventID=4702)]]</Select>
+        <Select Path="Security">*[System[(EventID &gt;=4698 and EventID &lt;=4702)]]</Select>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>

@@ -1,0 +1,39 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Object-Manipulation</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Manipulation of handles, SACLs, object deletions, and permissions.</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>1</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation and/or IADGOV -->
+      <!-- Policy Change Events -->
+      <Query Id="0" Path="Security">
+        <!-- 4715: The audit policy (SACL) on an object was changed. -->
+        <!-- 4817: Auditing settings on object were changed. -->
+        <!-- 4656: A handle to an object was requested. -->
+        <!-- 4658: The handle to an object was closed. -->
+        <!-- 4660: An object was deleted. -->
+        <!-- 4663: An attempt was made to access an object. -->
+        <!-- 4670: Permissions on an object were changed. -->
+        <Select Path="Security">*[System[(EventID=4715 or EventID=4817 or EventID=4656 or EventID=4658 or EventID=4660 or EventID=4663 or EventID=4670)]]</Select>
+      </Query>
+    </QueryList>]]></Query>
+    <ReadExistingEvents>true</ReadExistingEvents>
+    <TransportName>http</TransportName>
+    <ContentFormat>RenderedText</ContentFormat>
+    <Locale Language="en-US"/>
+    <LogFile>WEC2-Object-Manipulation</LogFile>
+    <AllowedSourceNonDomainComputers/>
+    <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+  </Subscription>

@@ -19,7 +19,8 @@
       <!-- Inspired by Microsoft Documentation and/or IADGOV -->
       <Query Id="0" Path="Security">
         <!-- 5632: Request made to authenticate to Wireless network (including Peer MAC -->
-        <Select Path="Security">*[System[(EventID=5632)]]</Select>
+        <!-- 5633: A request was made to authenticate to a wired network. -->
+        <Select Path="Security">*[System[(EventID=5632 or EventID=5633)]]</Select>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
