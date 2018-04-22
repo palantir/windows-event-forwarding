@@ -3,6 +3,7 @@
 This is a mostly-comprehensive table of all the event codes, WEF subscriptions, and WEC channels used in this project. Event codes for non-standard logs will be added as separate table entries.
 
 The following template is used:
+
 |Event Type|Event Code|Event Name|Logging: DCs|Logging: Servers|Logging: Workstations|Subscription|Subscription Name|Subscription Channel|Reporting: DCs|Reporting: Servers|Reporting: Workstations|
 |---|---|---|---|---|---|---|---|---|---|---|---|
 |The Auditing Type|The Event Code|The Event Name|If DCs are expected to log the event.|If servers are expected to log the event.|If workstations are expected to log the event.|Presence of a WEF subscription. (N/A = No Subscription)|The WEF subscription name.|The WEC channel name.|Testing Status.|Testing Status.|Testing Status.|
