@@ -57,7 +57,7 @@ Foreach ($job in $bitsjobs) {
 function Get-LnkFile {
     $obj = New-Object -ComObject WScript.Shell
     $desktop = "C:\Users\*\Desktop"
-    $path = Get-ChildItem $startup, $desktop -Filter *.lnk -Recurse 
+    $path = Get-ChildItem $desktop -Filter *.lnk -Recurse 
     $links = @()
     if ($path -is [string]) {
         $path = Get-ChildItem $path -Filter *.lnk
