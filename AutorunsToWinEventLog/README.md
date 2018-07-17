@@ -25,3 +25,7 @@ generates a CSV of Autoruns entries, converts them to JSON, and finally inserts
 them into a custom Windows Event Log. By doing this, we can take advantage of
 our existing WEF infrastructure to get these entries into our SIEM and start
 looking for signs of malicious persistence on endpoints and servers.
+
+Additionally, this code enumerates persistence mechanisms that Autoruns does not.
+Specifically it will enumerate BITS jobs, Desktop shortcuts, and Browser extensions.
+These items are placed into the same custom Windows Event log as Autoruns entries.
