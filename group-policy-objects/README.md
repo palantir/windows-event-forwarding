@@ -307,8 +307,6 @@ Set the following setting **Computer Configuration -> Policies -> Windows Settin
 * **Audit Authentication Policy Change**: Success, Failure
 * **Audit MPSSVC Rule-Level Policy Change**: Success, Failure
 * **Audit Other Policy Change Events**: Success, Failure
-* **Audit Non Sensitive Privilege Use**: Failure
-* **Audit Sensitive Privilege Use**: Success, Failure
 * **Audit Other System Events**: Success, Failure
 * **Audit Security State Change**: Success, Failure
 * **Audit Security System Extension**: Success, Failure
