@@ -3,6 +3,9 @@
 # The resulting CSV entries are written to a Windows Event Log called "Autoruns"
 
 ## Code to create the custom Autoruns Windows event log if it doesn't exist
+# The following event IDs are in use:
+# 1 - Sysinternals Autoruns results
+# 2 - Local Group Principals
 $logfileExists = Get-Eventlog -list | Where-Object {$_.logdisplayname -eq "Autoruns"}
 if (! $logfileExists) {
   New-EventLog -LogName Autoruns -Source AutorunsToWinEventLog
@@ -68,7 +71,7 @@ PrincipalType: $($Member.PrincipalType)
 PrincipalName: $($Member.PrincipalName)
 "@
 
-        Write-EventLog -LogName LocalGroupMembers -Source LocalGroupMembersScript -EntryType Information -EventId 1 -Message $Data
+        Write-EventLog -LogName Autoruns -Source AutorunsToWinEventLog -EntryType Information -EventId 2 -Message $Data
         $Member
 
     }
