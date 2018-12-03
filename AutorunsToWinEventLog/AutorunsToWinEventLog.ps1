@@ -61,11 +61,12 @@ $LocalGroups | % {
         $Member | Add-Member Noteproperty 'PrincipalName' $principalname
 
         $Data = @"
-        ComputerName=$($Member.ComputerName)
-        GroupName=$($Member.GroupName)
-        PrincipalType=$($Member.PrincipalType)
-        PrincipalName=$($Member.PrincipalName)
-        "@
+
+ComputerName: $($Member.ComputerName)
+GroupName: $($Member.GroupName)
+PrincipalType: $($Member.PrincipalType)
+PrincipalName: $($Member.PrincipalName)
+"@
 
         Write-EventLog -LogName LocalGroupMembers -Source LocalGroupMembersScript -EntryType Information -EventId 1 -Message $Data
         $Member
