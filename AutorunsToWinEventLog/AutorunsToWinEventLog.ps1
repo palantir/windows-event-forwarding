@@ -1,4 +1,4 @@
-# Author: Chris Long (@Centurion)
+# Authors: Chris Long (@Centurion), Andy Robbins (@_wald0)
 # This script executes the Sysinternals Autoruns CLI utility and saves the output to a CSV.
 # The resulting CSV entries are written to a Windows Event Log called "Autoruns"
 
@@ -72,7 +72,6 @@ PrincipalName: $($Member.PrincipalName)
 "@
 
         Write-EventLog -LogName Autoruns -Source AutorunsToWinEventLog -EntryType Information -EventId 2 -Message $Data
-        $Member
 
     }
 }
