@@ -39,8 +39,8 @@ Foreach ($item in $autorunsArray) {
 # Collect principals in interesting local groups (Administrators, Remote Desktop Users, and DCOM Users)
 # Requires PowerShell 5.1 due to usage of Get-NetLocalGroup and Get-LocalGroupMember
 
-# Get the FQDN of the current user's domain. Todo: update this method to support foreign security principals in local groups.
-$DomainFQDN = $ENV:USERDNSDOMAIN
+# Get the FQDN of the current computer's domain. Todo: update this method to support foreign security principals in local groups.
+$DomainFQDN = $ComputerName.Split(".")[1..($ComputerName.Split(".").length-1)] -Join "."
 
 $ComputerName = (Get-WmiObject win32_computersystem).DNSHostName + "." + (Get-WmiObject -class win32_computersystem).Domain
 
