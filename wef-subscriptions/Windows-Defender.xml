@@ -22,6 +22,14 @@
         <!-- Modern Windows Defender event provider Detection events (1006-1009) and (1116-1119) -->
         <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[( (EventID &gt;= 1006 and EventID &lt;= 1009) )]]</Select>
         <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[( (EventID &gt;= 1116 and EventID &lt;= 1119) )]]</Select>
+        <!-- 1120: Windows Defender Antivirus has deduced the hashes for a threat resource (requires registry activation). -->
+        <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[(EventID=1120)]]</Select>
+        <!-- 5001: Windows Defender Real-time protection is disabled. -->
+        <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[(EventID=5001)]]</Select>
+        <!-- 5000: Windows Defender Real-time protection is enabled. -->
+        <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[(EventID=5000)]]</Select>
+        <!-- 5004: Windows Defender The real-time protection configuration changed (enabled or disabled component). -->
+        <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[(EventID=5001)]]</Select>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
