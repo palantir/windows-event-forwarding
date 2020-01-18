@@ -46,6 +46,22 @@
         <!-- 4867: A trusted forest information entry was modified. -->
         <Select Path="Security">*[System[(EventID=4706 or EventID=4707 or EventID=4716 or EventID=4717 or EventID=4718 or EventID=4739 or EventID=4864 or EventID=4865 or EventID=4866 or EventID=4867)]]</Select>
       </Query>
+      <Query Id="4" Path="Security">
+        <!-- 4928: An Active Directory replica source naming context was established. -->
+        <!-- 4929: An Active Directory replica source naming context was removed -->
+        <!-- 4930: An Active Directory replica source naming context was modified. -->
+        <!-- 4931: An Active Directory replica destination naming context was modified. -->
+        <!-- 4932: Synchronization of a replica of an Active Directory naming context has begun. -->
+        <!-- 4933: Synchronization of a replica of an Active Directory naming context has ended. -->
+        <!-- 4934: Attributes of an Active Directory object were replicated. -->
+        <!-- 4935: Replication failure begins. -->
+        <!-- 4936: Replication failure ends. -->
+        <!-- 4937: A lingering object was removed from a replica. -->
+        <Select Path="Security">*[System[(EventID &gt;=4928 and EventID &lt;=4937)]]</Select>
+      </Query>  
+      <Query Id="5" Path="Directory Service">
+        <!-- All Directory Service logs (maintenance, operations) -->
+		<Select Path="Directory Service">*</Select>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
   <TransportName>http</TransportName>
