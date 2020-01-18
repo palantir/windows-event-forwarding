@@ -16,7 +16,7 @@
   </Delivery>
   <Query><![CDATA[
     <QueryList>
-      <!-- Inspired by Microsoft Documentation - Improved by RadarServices -->
+      <!-- Inspired by Microsoft Documentation -->
       <Query Id="0" Path="Microsoft-Windows-Authentication/AuthenticationPolicyFailures-DomainController">
         <Select Path="Microsoft-Windows-Authentication/AuthenticationPolicyFailures-DomainController">*[System[Provider[@Name='Microsoft-Windows-NTLM']]]</Select>
         <Select Path="Microsoft-Windows-Authentication/ProtectedUserFailures-DomainController">*[System[Provider[@Name='Microsoft-Windows-NTLM']]]</Select>
