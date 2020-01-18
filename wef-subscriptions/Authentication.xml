@@ -46,6 +46,8 @@
         <Select Path="Security">*[System[(EventID=5378)]]</Select>
         <!-- Suppress SECURITY_LOCAL_SYSTEM_RID A special account used by the OS, noisy -->
         <Suppress Path="Security">*[EventData[Data[1]="S-1-5-18"]]</Suppress>
+        <!-- 6041: A CredSSP authentication to TERMSRV/<IP> failed to negotiate.  The remote host offered version 3 which is not permitted by Encryption Oracle Remediation CVE-2018-0886 -->
+        <Select Path="System">*[System[(EventID=6041)]]</Select>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
