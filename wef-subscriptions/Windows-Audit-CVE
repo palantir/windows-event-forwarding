@@ -1,0 +1,32 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>Windows-Audit-CVE</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Windows CVE audit (eg: CVE 2020-0601)</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>5</MaxItems>
+      <MaxLatencyTime>300000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="1800000"/>
+    </PushSettings>
+  </Delivery>
+  <Query><![CDATA[
+    <QueryList>
+      <!-- Inspired by Microsoft Documentation -->
+      <Query Id="0" Path="Application">
+        <!-- Windows Audit CVE -->
+        <Select Path="Application">*[System[Provider[@Name='Microsoft-Windows-Audit-CVE']]]</Select>
+      </Query>
+    </QueryList>]]></Query>
+  <ReadExistingEvents>false</ReadExistingEvents>
+  <TransportName>http</TransportName>
+  <ContentFormat>Events</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>WEC8-Windows-Audit-CVE</LogFile>
+  <AllowedSourceNonDomainComputers/>
+  <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>
