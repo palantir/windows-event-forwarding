@@ -16,7 +16,7 @@
   </Delivery>
   <Query><![CDATA[
     <QueryList>
-      <!-- Inspired by Microsoft Documentation - Improved by RadarServices -->
+      <!-- Inspired by Microsoft Documentation -->
       <!-- Event folder disabled per default -->
       <Query Id="0" Path="Microsoft-Windows-CAPI2/Operational">
         <!-- 11: Cert Trust Chain Build Failed -->
