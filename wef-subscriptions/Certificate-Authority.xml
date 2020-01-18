@@ -23,6 +23,18 @@
         <!-- 4888: Denied request -->
         <Select Path="Security">*[System[(EventID=4886 or EventID=4887 or EventID=4888)]]</Select>
       </Query>
+      <Query Id="33" Path="Security">
+        <!-- COLLECT EVENTS RELATED TO OCSP -->
+        <!-- 5120: OCSP Responder Service Started. -->
+        <!-- 5121: OCSP Responder Service Stopped. -->
+        <!-- 5122: A Configuration entry changed in the OCSP Responder Service. -->
+        <!-- 5123: A configuration entry changed in the OCSP Responder Service. -->
+        <!-- 5124: A security setting was updated on OCSP Responder Service. -->
+        <!-- 5125: A request was submitted to OCSP Responder Service. -->
+        <!-- 5126: Signing Certificate was automatically updated by the OCSP Responder Service. -->
+        <!-- 5127: The OCSP Revocation Provider successfully updated the revocation information. -->
+        <Select Path="Security">*[System[(EventID &gt;=5120 and EventID &lt;=5127]]</Select>
+      </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
   <TransportName>http</TransportName>
