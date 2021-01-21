@@ -27,7 +27,7 @@
         <!-- 5138: A directory service object was undeleted. --> 
         <!-- 5139: A directory service object was moved. --> 
         <!-- 5141: A directory service object was deleted. --> 
-        <Select Path="Security">*[System[(EventID=5136 or EventID=5137 or EventID=5178 or EventID=5139 or EventID=5141)]]</Select>
+        <Select Path="Security">*[System[(EventID=5136 or EventID=5137 or EventID=5138 or EventID=5139 or EventID=5141)]]</Select>
       </Query>
       <Query Id="2" Path="Security">
         <!-- 4713: Kerberos Policy was changed. -->
