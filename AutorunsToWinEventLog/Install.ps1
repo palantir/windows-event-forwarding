@@ -9,7 +9,11 @@ $autorunsPath = "c:\Program Files\AutorunsToWinEventLog\Autorunsc64.exe"
 if(!(test-path $autorunsPath)) {
   # Requires TLS 1.2
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-  Invoke-WebRequest -Uri "http://live.sysinternals.com/autorunsc64.exe" -OutFile "$autorunsPath"
+  Try { 
+    Invoke-WebRequest -Uri "https://live.sysinternals.com/autorunsc64.exe" -OutFile "$autorunsPath"
+  } Catch {
+    Invoke-WebRequest -Uri "http://live.sysinternals.com/autorunsc64.exe" -OutFile "$autorunsPath"
+  }
 }
 
 # Put a copy of the AutorunsToWinEventLog script in the Autoruns directory
