@@ -120,7 +120,7 @@ wevtutil im C:\windows\system32\CustomEventChannels.man
 ```
 $xml = wevtutil el | select-string -pattern "WEC"
     foreach ($subscription in $xml) {
-      wevtutil sl $subscription /ms:4194304
+      wevtutil sl $subscription /ms:4294967296
     }
 ```
 
