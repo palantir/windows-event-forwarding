@@ -1,7 +1,7 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
   <SubscriptionId>Shares</SubscriptionId>
   <SubscriptionType>SourceInitiated</SubscriptionType>
-  <Description>Share access, C$ share or file share access, share creation or deletetion, UNC drive mapping.</Description>
+  <Description>Share access, C$ share or file share access, share creation or deletion, UNC drive mapping.</Description>
   <Enabled>true</Enabled>
   <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
   <ConfigurationMode>Custom</ConfigurationMode>
