@@ -21,7 +21,7 @@ $autorunsCsv = "c:\Program Files\AutorunsToWinEventLog\AutorunsOutput.csv"
 # -c           Output as CSV
 # -h           Show file hashes
 # -s           Verify digital signatures
-# -v           Query file hashes againt Virustotal (no uploading)
+# -v           Query file hashes against Virustotal (no uploading)
 # -vt          Accept Virustotal Terms of Service
 #  *           Scan all user profiles
 
