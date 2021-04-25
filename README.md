@@ -6,7 +6,7 @@ Over the past few years, Palantir has a maintained an internal Windows Event For
 The goal of this project is to provide the necessary building blocks for organizations to rapidly evaluate and deploy WEF to a production environment, and centralize public efforts to improve WEF subscriptions and encourage adoption. While WEF has become more popular in recent years, it is still dramatically underrepresented in the community, and it is our hope that this project may encourage others to adopt it for incident detection and response purposes. We acknowledge the efforts that Microsoft, IAD, and other contributors have made to this space and wish to thank them for providing many of the subscriptions, ideas, and techniques that will be covered in this post.
 
 ## About Windows Event Forwarding
-Windows Event Forwarding (WEF) is a powerful log forwarding solution integrated within modern versions of Microsoft Windows. One of the most comprehensive descriptions of WEF can be found on the [Microsoft Docs page here](https://docs.microsoft.com/en-us/windows/threat-protection/use-windows-event-forwarding-to-assist-in-instrusion-detection), but is summarized as follows:
+Windows Event Forwarding (WEF) is a powerful log forwarding solution integrated within modern versions of Microsoft Windows. One of the most comprehensive descriptions of WEF can be found on the [Microsoft Docs page here](https://docs.microsoft.com/en-us/windows/threat-protection/use-windows-event-forwarding-to-assist-in-intrusion-detection), but is summarized as follows:
 
 * Windows Event Forwarding allows for event logs to be sent, either via a push or pull mechanism, to one or more centralized Windows Event Collector (WEC) servers.
 * WEF is agent-free, and relies on native components integrated into the operating system. WEF is supported for both workstation and server builds of Windows.
@@ -62,7 +62,7 @@ SOFTWARE.
 Many open source publications were referenced for the development of these Subscriptions, and we wish to acknowledge those who have contributed to this effort.
 
 * [Palantir Medium: Windows Event Forwarding for Network Defense](https://medium.com/@palantir/windows-event-forwarding-for-network-defense-cb208d5ff86f)
-* [Microsoft Windows Event Forwarding to help with intrusion detection](https://docs.microsoft.com/en-us/windows/threat-protection/use-windows-event-forwarding-to-assist-in-instrusion-detection)
+* [Microsoft Windows Event Forwarding to help with intrusion detection](https://docs.microsoft.com/en-us/windows/threat-protection/use-windows-event-forwarding-to-assist-in-intrusion-detection)
 * [Monitoring What Matters](https://blogs.technet.microsoft.com/jepayne/2015/11/23/monitoring-what-matters-windows-event-forwarding-for-everyone-even-if-you-already-have-a-siem/)
 * [Spotting the Adversary](https://www.iad.gov/iad/library/reports/spotting-the-adversary-with-windows-event-log-monitoring.cfm)
 * [Creating Custom Windows Event Forwarding Logs](https://blogs.technet.microsoft.com/russellt/2016/05/18/creating-custom-windows-event-forwarding-logs/)
