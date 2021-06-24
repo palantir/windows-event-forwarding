@@ -34,49 +34,58 @@ Set the following setting **Computer Configuration -> Policies -> Windows Settin
 
 * **Windows Remote Management (WS-Management)**: Startup Mode: Automatic
 
-Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Advanced Audit Configuration** to the following:
+Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Advanced Audit Configuration -> Audit Policies** to the following:
 
-* **Audit Credential Validation**: Success, Failure
-* **Audit Other Account Logon Events**: Success, Failure
-* **Audit Kerberos Authentication Service**: Success, Failure
-* **Audit Kerberos Service Ticket Operations**: Success, Failure
-* **Audit Computer Account Management**: Success, Failure
-* **Audit Distribution Group Management**: Success, Failure
-* **Audit Other Account Management Events**: Success, Failure
-* **Audit Security Group Management**: Success, Failure
-* **Audit User Account Management**: Success, Failure
-* **Audit DPAPI Activity**: Success, Failure
-* **Audit PNP Activity**: Success, Failure
-* **Audit Process Creation**: Success, Failure
-* **Audit Process Termination**: Success, Failure
-* **Audit Detailed Directory Service Replication**: Success, Failure
-* **Audit Directory Service Access**: Success, Failure
-* **Audit Directory Service Changes**: Success, Failure
-* **Audit Directory Service Replication**: Success, Failure
-* **Audit Account Lockout**: Success, Failure
-* **Audit User/Device Claims**: Success, Failure
-* **Audit Group Membership**: Success, Failure
-* **Audit Logoff**: Success, Failure
-* **Audit Logon**: Success, Failure
-* **Audit Other Logon/Logoff Events**: Success, Failure
-* **Audit Special Logon**: Success, Failure
-* **Audit Detailed File Share**: Failure
-* **Audit File Share**: Success, Failure
-* **Audit File System**: Success, Failure
-* **Audit Filtering Platform Connection**: Failure
-* **Audit Other Object Access Events**: Success, Failure
-* **Audit Registry**: Success, Failure
-* **Audit Removable Storage**: Success, Failure
-* **Audit Audit Policy Change**: Success, Failure
-* **Audit Authentication Policy Change**: Success, Failure
-* **Audit MPSSVC Rule-Level Policy Change**: Success, Failure
-* **Audit Other Policy Change Events**: Success, Failure
-* **Audit Non Sensitive Privilege Use**: Failure
-* **Audit Sensitive Privilege Use**: Success, Failure
-* **Audit Other System Events**: Success, Failure
-* **Audit Security State Change**: Success, Failure
-* **Audit Security System Extension**: Success, Failure
-* **Audit System Integrity**: Success, Failure
+* **Account Logon**
+  * **Audit Credential Validation**: Success, Failure
+  * **Audit Kerberos Authentication Service**: Success, Failure
+  * **Audit Kerberos Service Ticket Operations**: Success, Failure
+  * **Audit Other Account Logon Events**: Success, Failure
+* **Account Management**
+  * **Audit Computer Account Management**: Success, Failure
+  * **Audit Distribution Group Management**: Success, Failure
+  * **Audit Other Account Management Events**: Success, Failure
+  * **Audit Security Group Management**: Success, Failure
+  * **Audit User Account Management**: Success, Failure
+* **Detailed Tracking**
+  * **Audit DPAPI Activity**: Success, Failure
+  * **Audit PNP Activity**: Success, Failure
+  * **Audit Process Creation**: Success, Failure
+  * **Audit Process Termination**: Success, Failure
+* **DS Access**
+  * **Audit Detailed Directory Service Replication**: Success, Failure
+  * **Audit Directory Service Access**: Success, Failure
+  * **Audit Directory Service Changes**: Success, Failure
+  * **Audit Directory Service Replication**: Success, Failure
+* **Logon/Logoff**
+  * **Audit Account Lockout**: Success, Failure
+  * **Audit User/Device Claims**: Success, Failure
+  * **Audit Group Membership**: Success, Failure
+  * **Audit Logoff**: Success, Failure
+  * **Audit Logon**: Success, Failure
+  * **Audit Other Logon/Logoff Events**: Success, Failure
+  * **Audit Special Logon**: Success, Failure
+* **Object Access**
+  * **Audit Detailed File Share**: Failure
+  * **Audit File Share**: Success, Failure
+  * **Audit File System**: Success, Failure
+  * **Audit Filtering Platform Connection**: Failure
+  * **Audit Other Object Access Events**: Success, Failure
+  * **Audit Registry**: Success, Failure
+  * **Audit Removable Storage**: Success, Failure
+* **Policy Change**
+  * **Audit Audit Policy Change**: Success, Failure
+  * **Audit Authentication Policy Change**: Success, Failure
+  * **Audit MPSSVC Rule-Level Policy Change**: Success, Failure
+  * **Audit Other Policy Change Events**: Success, Failure
+* **Privilege Use**
+  * **Audit Non Sensitive Privilege Use**: Failure
+  * **Audit Other System Events**: Success, Failure
+  * **Audit Sensitive Privilege Use**: Success, Failure
+* **System**
+  * **Audit Security State Change**: Success, Failure
+  * **Audit Security System Extension**: Success, Failure
+  * **Audit System Integrity**: Success, Failure
 
 Set the following setting **Computer Configuration -> Administrative Templates -> System -> Audit Process Creation** to the following:
 
@@ -163,38 +172,46 @@ Set the following setting **Computer Configuration -> Policies -> Windows Settin
 
 Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Advanced Audit Configuration** to the following:
 
-* **Audit Credential Validation**: Success, Failure
-* **Audit Other Account Logon Events**: Success, Failure
-* **Audit Security Group Management**: Success, Failure
-* **Audit User Account Management**: Success, Failure
-* **Audit DPAPI Activity**: Success, Failure
-* **Audit PNP Activity**: Success, Failure
-* **Audit Process Creation**: Success, Failure
-* **Audit Process Termination**: Success, Failure
-* **Audit Account Lockout**: Success, Failure
-* **Audit User/Device Claims**: Success, Failure
-* **Audit Group Membership**: Success, Failure
-* **Audit Logoff**: Success, Failure
-* **Audit Logon**: Success, Failure
-* **Audit Other Logon/Logoff Events**: Success, Failure
-* **Audit Special Logon**: Success, Failure
-* **Audit Detailed File Share**: Success, Failure
-* **Audit File Share**: Success, Failure
-* **Audit File System**: Success, Failure
-* **Audit Filtering Platform Connection**: Failure
-* **Audit Other Object Access Events**: Success, Failure
-* **Audit Registry**: Success, Failure
-* **Audit Removable Storage**: Success, Failure
-* **Audit Audit Policy Change**: Success, Failure
-* **Audit Authentication Policy Change**: Success, Failure
-* **Audit MPSSVC Rule-Level Policy Change**: Success, Failure
-* **Audit Other Policy Change Events**: Success, Failure
-* **Audit Non Sensitive Privilege Use**: Failure
-* **Audit Sensitive Privilege Use**: Success, Failure
-* **Audit Other System Events**: Success, Failure
-* **Audit Security State Change**: Success, Failure
-* **Audit Security System Extension**: Success, Failure
-* **Audit System Integrity**: Success, Failure
+* **Account Logon**
+  * **Audit Credential Validation**: Success, Failure
+  * **Audit Other Account Logon Events**: Success, Failure
+* **Account Management**
+  * **Audit Security Group Management**: Success, Failure
+  * **Audit User Account Management**: Success, Failure
+* **Detailed Tracking**
+  * **Audit DPAPI Activity**: Success, Failure
+  * **Audit PNP Activity**: Success, Failure
+  * **Audit Process Creation**: Success, Failure
+  * **Audit Process Termination**: Success, Failure
+* **Logon/Logoff**
+  * **Audit Account Lockout**: Success, Failure
+  * **Audit User/Device Claims**: Success, Failure
+  * **Audit Group Membership**: Success, Failure
+  * **Audit Logoff**: Success, Failure
+  * **Audit Logon**: Success, Failure
+  * **Audit Other Logon/Logoff Events**: Success, Failure
+  * **Audit Special Logon**: Success, Failure
+* **Object Access**
+  * **Audit Detailed File Share**: Failure
+  * **Audit File Share**: Success, Failure
+  * **Audit File System**: Success, Failure
+  * **Audit Filtering Platform Connection**: Failure
+  * **Audit Other Object Access Events**: Success, Failure
+  * **Audit Registry**: Success, Failure
+  * **Audit Removable Storage**: Success, Failure
+* **Policy Change**
+  * **Audit Audit Policy Change**: Success, Failure
+  * **Audit Authentication Policy Change**: Success, Failure
+  * **Audit MPSSVC Rule-Level Policy Change**: Success, Failure
+  * **Audit Other Policy Change Events**: Success, Failure
+* **Privilege Use**
+  * **Audit Non Sensitive Privilege Use**: Failure
+  * **Audit Other System Events**: Success, Failure
+  * **Audit Sensitive Privilege Use**: Success, Failure
+* **System**
+  * **Audit Security State Change**: Success, Failure
+  * **Audit Security System Extension**: Success, Failure
+  * **Audit System Integrity**: Success, Failure
 
 Set the following setting **Computer Configuration -> Administrative Templates -> System -> Audit Process Creation** to the following:
 
@@ -279,38 +296,46 @@ Set the following setting **Computer Configuration -> Policies -> Windows Settin
 
 * **Windows Remote Management (WS-Management)**: Startup Mode: Automatic
 
-Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Advanced Audit Configuration** to the following:
+Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Advanced Audit Configuration -> Audit Policies** to the following:
 
-* **Audit Credential Validation**: Success, Failure
-* **Audit Other Account Logon Events**: Success, Failure
-* **Audit Security Group Management**: Success, Failure
-* **Audit User Account Management**: Success, Failure
-* **Audit DPAPI Activity**: Success, Failure
-* **Audit PNP Activity**: Success, Failure
-* **Audit Process Creation**: Success, Failure
-* **Audit Process Termination**: Success, Failure
-* **Audit Account Lockout**: Success, Failure
-* **Audit User/Device Claims**: Success, Failure
-* **Audit Group Membership**: Success, Failure
-* **Audit Logoff**: Success, Failure
-* **Audit Logon**: Success, Failure
-* **Audit Other Logon/Logoff Events**: Success, Failure
-* **Audit Special Logon**: Success, Failure
-* **Audit Detailed File Share**: Success, Failure
-* **Audit File Share**: Success, Failure
-* **Audit File System**: Success, Failure
-* **Audit Filtering Platform Connection**: Failure
-* **Audit Other Object Access Events**: Success, Failure
-* **Audit Registry**: Success, Failure
-* **Audit Removable Storage**: Success, Failure
-* **Audit Audit Policy Change**: Success, Failure
-* **Audit Authentication Policy Change**: Success, Failure
-* **Audit MPSSVC Rule-Level Policy Change**: Success, Failure
-* **Audit Other Policy Change Events**: Success, Failure
-* **Audit Other System Events**: Success, Failure
-* **Audit Security State Change**: Success, Failure
-* **Audit Security System Extension**: Success, Failure
-* **Audit System Integrity**: Success, Failure
+* **Account Logon**
+  * **Audit Credential Validation**: Success, Failure
+  * **Audit Other Account Logon Events**: Success, Failure
+* **Account Management**
+  * **Audit Security Group Management**: Success, Failure
+  * **Audit User Account Management**: Success, Failure
+* **Detailed Tracking**
+  * **Audit DPAPI Activity**: Success, Failure
+  * **Audit PNP Activity**: Success, Failure
+  * **Audit Process Creation**: Success, Failure
+  * **Audit Process Termination**: Success, Failure
+* **Logon/Logoff**
+  * **Audit Account Lockout**: Success, Failure
+  * **Audit User/Device Claims**: Success, Failure
+  * **Audit Group Membership**: Success, Failure
+  * **Audit Logoff**: Success, Failure
+  * **Audit Logon**: Success, Failure
+  * **Audit Other Logon/Logoff Events**: Success, Failure
+  * **Audit Special Logon**: Success, Failure
+* **Object Access**
+  * **Audit Detailed File Share**: Failure
+  * **Audit File Share**: Success, Failure
+  * **Audit File System**: Success, Failure
+  * **Audit Filtering Platform Connection**: Failure
+  * **Audit Other Object Access Events**: Success, Failure
+  * **Audit Registry**: Success, Failure
+  * **Audit Removable Storage**: Success, Failure
+* **Policy Change**
+  * **Audit Audit Policy Change**: Success, Failure
+  * **Audit Authentication Policy Change**: Success, Failure
+  * **Audit MPSSVC Rule-Level Policy Change**: Success, Failure
+  * **Audit Other Policy Change Events**: Success, Failure
+* **Privilege Use**
+  * **Audit Other System Events**: Success, Failure
+* **System**
+  * **Audit Security State Change**: Success, Failure
+  * **Audit Security System Extension**: Success, Failure
+  * **Audit System Integrity**: Success, Failure
 
 Set the following setting **Computer Configuration -> Administrative Templates -> System -> Audit Process Creation** to the following:
 
