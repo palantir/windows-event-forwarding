@@ -26,10 +26,6 @@ Set the following setting **Computer Configuration -> Policies -> Windows Settin
 * **Network security: Restrict NTLM: Audit NTLM authentication in this domain**: Enable all
 * **Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers**: Audit all
 
-Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Restricted Groups** to the following:
-
-* **BUILTIN\Event Log Readers:** NT AUTHORITY\NETWORK SERVICE
-
 Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> System Services** to the following:
 
 * **Windows Remote Management (WS-Management)**: Startup Mode: Automatic
@@ -93,6 +89,8 @@ Set the following setting **Computer Configuration -> Administrative Templates -
 * **Back up log automatically when full:** Disabled
 * **Control Event Log behavior when log file reaches its maximum size**: Disabled
 * **Specify the maximum log file size (KB)**: 4194304
+* **Configure log access**: Enable
+  * **Log Access**: O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-32-573)(A;;0x1;;;NS)
 
 Set the following setting **Computer Configuration -> Administrative Templates -> Windows Components -> Event Log Service -> System** to the following:
 
@@ -153,10 +151,6 @@ Set the following setting **Computer Configuration -> Policies -> Windows Settin
 
 * **Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings**: Enabled
 
-Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Restricted Groups** to the following:
-
-* **BUILTIN\Event Log Readers:** NT AUTHORITY\NETWORK SERVICE
-
 Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> System Services** to the following:
 
 * **Windows Remote Management (WS-Management)**: Startup Mode: Automatic
@@ -211,6 +205,8 @@ Set the following setting **Computer Configuration -> Administrative Templates -
 * **Back up log automatically when full:** Disabled
 * **Control Event Log behavior when log file reaches its maximum size**: Disabled
 * **Specify the maximum log file size (KB)**: 4194304
+* **Configure log access**: Enable
+  * **Log Access**: O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-32-573)(A;;0x1;;;NS)
 
 Set the following setting **Computer Configuration -> Administrative Templates -> Windows Components -> Event Log Service -> System** to the following:
 
@@ -271,10 +267,6 @@ Set the following setting **Computer Configuration -> Policies -> Windows Settin
 
 * **Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings**: Enabled
 
-Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Restricted Groups** to the following:
-
-* **BUILTIN\Event Log Readers:** NT AUTHORITY\NETWORK SERVICE
-
 Set the following setting **Computer Configuration -> Policies -> Windows Settings -> Security Settings -> System Services** to the following:
 
 * **Windows Remote Management (WS-Management)**: Startup Mode: Automatic
@@ -327,6 +319,8 @@ Set the following setting **Computer Configuration -> Administrative Templates -
 * **Back up log automatically when full:** Disabled
 * **Control Event Log behavior when log file reaches its maximum size**: Disabled
 * **Specify the maximum log file size (KB)**: 4194304
+* **Configure log access**: Enable
+  * **Log Access**: O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-32-573)(A;;0x1;;;NS)
 
 Set the following setting **Computer Configuration -> Administrative Templates -> Windows Components -> Event Log Service -> System** to the following:
 
@@ -426,3 +420,5 @@ Set the following setting **Computer Configuration -> Policies -> Administrative
 
 * **Configure target Subscription Manager**: Enabled
   * **SubscriptionManagers**: Server=http://SERVERNAME:5985/wsman/SubscriptionManager/WEC
+* **Configure forwarder ressource usage**: Enable
+  * **The maximum forwarding rate (events/sec) allowed for the forwarder**: 1000
