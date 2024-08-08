@@ -26,7 +26,7 @@
         <!-- 1104: The security log is now full. -->
         <!-- 1105: Event log automatic backup. -->
         <!-- 1108: The event logging service encountered an error while processing an incoming event published from %1 -->
-        <Select Path="Security">*[System[(EventID=1100 or EventID=1104 OR EventID=1105 OR EventID=1108)]]</Select>
+        <Select Path="Security">*[System[(EventID=1100 or EventID=1104 or EventID=1105 or EventID=1108)]]</Select>
     </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
