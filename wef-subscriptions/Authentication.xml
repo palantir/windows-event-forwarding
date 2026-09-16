@@ -44,8 +44,37 @@
         <Select Path="Security">*[System[(EventID=4964)]]</Select>
         <!-- 5378 The requested credentials delegation was disallowed by policy. -->
         <Select Path="Security">*[System[(EventID=5378)]]</Select>
-        <!-- Suppress SECURITY_LOCAL_SYSTEM_RID A special account used by the OS, noisy -->
-        <Suppress Path="Security">*[EventData[Data[1]="S-1-5-18"]]</Suppress>
+        <!--
+          Suppression: drop the machine's own SYSTEM account (SECURITY_LOCAL_SYSTEM_RID,
+          S-1-5-18), which generates high-volume, low-value authentication noise.
+
+          These rules match on NAMED fields rather than field position. EventData
+          ordering differs per event ID, so no single positional index means the same
+          thing across this query:
+
+            4624/4625  Data[1]=SubjectUserSid   Data[5]=TargetUserSid
+            4634       Data[1]=TargetUserSid    Data[5]=LogonType
+            4647       Data[1]=TargetUserSid    (only 4 fields, no Data[5])
+            4672       Data[1]=SubjectUserSid   Data[5]=PrivilegeList
+
+          Suppressing on Data[1] dropped UAC elevation logons, because those are 4624s
+          where SYSTEM is the *subject* requesting the logon and a real user is the
+          target. Analysts searching for 4624 to find where an account was used would
+          not see them.
+        -->
+        <!--
+          Drop logon/logoff/lock events where the account actually being logged on is
+          SYSTEM. Matching TargetUserSid rather than SubjectUserSid is what preserves
+          UAC elevation logons, and it stays correct on 4634/4647, where the target
+          fields come first.
+        -->
+        <Suppress Path="Security">*[EventData[Data[@Name="TargetUserSid"]="S-1-5-18"]]</Suppress>
+        <!--
+          4672 has no TargetUserSid: the account receiving the privileges is the
+          subject. SYSTEM triggers this on nearly every boot-time logon, so it needs
+          its own rule rather than being covered by the one above.
+        -->
+        <Suppress Path="Security">*[System[(EventID=4672)]] and *[EventData[Data[@Name="SubjectUserSid"]="S-1-5-18"]]</Suppress>
       </Query>
     </QueryList>]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
